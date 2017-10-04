@@ -1,0 +1,12 @@
+{
+	"editor.quickSuggestions": {
+		"other": true,
+		"comments": false,
+		"strings": false
+	},
+	"editor.parameterHints": true,
+	"editor.wordBasedSuggestions": true,
+	"editor.selectionHighlight": ,
+
+	"typescript.tsdk": "C:\\Users\\kylek\\AppData\\Roaming\\npm\\node_modules\\typescript\\lib"
+}
