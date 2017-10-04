@@ -79,8 +79,33 @@ export class Game {
 		this.buildScoringPanel();
 
 		// TODO: check for a winner
+		this.checkForWinner();
 	}
 
+	private checkForWinner(): void {
+		let playersAtPhase10: Player[];
+
+		playersAtPhase10 = this.players.filter( (player: Player) => {
+			if(player.phase === 10){
+				return player;
+			}
+		});
+
+		let lowestScorePlayer: Player | undefined;
+		let winningPlayerNum : number | undefined;
+		for (var i = 0; i < playersAtPhase10.length; i++) {
+			var player = playersAtPhase10[i];
+			if (lowestScorePlayer === undefined || lowestScorePlayer.score > player.score) {
+				lowestScorePlayer = player;
+				winningPlayerNum = i+1;
+			}
+		}
+
+		if (winningPlayerNum !== undefined) {
+			alert('Player ' + winningPlayerNum + ' has won the game!');
+			// end the game somehow
+		}
+	}
 
 	private updateScoreboard(): void {
 		let scoreRows: HTMLElement = document.getElementById('scoreRows') as HTMLElement;
