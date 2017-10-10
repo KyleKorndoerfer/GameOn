@@ -4,7 +4,8 @@
 	"description": "A scorekeeper for games (backyard, cars, etc.)",
 	"main": "index.js",
 	"scripts": {
-		"start": "http-server"
+		"start": "http-server",
+		"tsc": "tsc -p ."
 	},
 	"author": "S. Kyle Korndoerfer",
 	"license": "MIT",
