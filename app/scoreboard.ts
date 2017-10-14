@@ -18,4 +18,20 @@ export class Scoreboard {
 
 		this.scoreRows.innerHTML = rows;
 	}
+
+	buildScoringPanel(players: Player[]): void {
+		let scoringBody = document.getElementById('roundRows') as HTMLElement;
+		let rows: string = '';
+
+		for (var i = 0; i < players.length; i++) {
+			var player = players[i];
+
+			rows += `<tr><td>Player ${i+1}</td>`;
+			rows += `  <td><input type="text" id="playerScore${i}" class="form-control input-sm" placeholder="points" /></td>`;
+			rows += `  <td><input type="checkbox" id="playerPhase${i}" class="form-control input-sm" /></td>`;
+			rows += `</tr>`;
+		}
+
+		scoringBody.innerHTML = rows;
+	}
 }

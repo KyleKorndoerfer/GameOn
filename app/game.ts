@@ -57,7 +57,7 @@ export class Game {
 		this.gameBoard.startForm.hide();
 
 		this.scoreBoard.updateScoreboard(this.players);
-		this.buildScoringPanel();
+		this.scoreBoard.buildScoringPanel(this.players);
 		$(this.scoreBoard.scoreboardDiv).show(1000);
 		$(this.scoreBoard.scoringDiv).show(1000);
 	}
@@ -78,9 +78,8 @@ export class Game {
 
 		// update the scoreboard & reset the scoring panel
 		this.scoreBoard.updateScoreboard(this.players);
-		this.buildScoringPanel();
+		this.scoreBoard.buildScoringPanel(this.players);
 
-		// TODO: check for a winner
 		this.checkForWinner();
 	}
 
@@ -107,21 +106,5 @@ export class Game {
 			alert('Player ' + winningPlayerNum + ' has won the game!');
 			// end the game somehow
 		}
-	}
-
-	private buildScoringPanel(): void {
-		let scoringBody = document.getElementById('roundRows') as HTMLElement;
-		let rows: string = '';
-
-		for (var i = 0; i < this.players.length; i++) {
-			var player = this.players[i];
-
-			rows += `<tr><td>Player ${i+1}</td>`;
-			rows += `  <td><input type="text" id="playerScore${i}" class="form-control input-sm" placeholder="points" /></td>`;
-			rows += `  <td><input type="checkbox" id="playerPhase${i}" class="form-control input-sm" /></td>`;
-			rows += `</tr>`;
-		}
-
-		scoringBody.innerHTML = rows;
 	}
 }
