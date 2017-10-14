@@ -1,4 +1,5 @@
 import { GameBoard } from './gameBoard';
+import { Scoreboard } from './scoreboard';
 import { Player } from './player';
 
 import * as $ from 'jquery';
@@ -10,9 +11,9 @@ export class Game {
 
 	// objects
 	private readonly gameBoard: GameBoard;
+	private readonly scoreBoard: Scoreboard;
 	private players: Player[] = [];
-	private scoreboardDiv: HTMLElement = document.getElementById('scoreboard') as HTMLElement;
-	private scoringDiv: HTMLElement = document.getElementById('scoring') as HTMLElement;
+
 	private endRoundButton: JQuery<HTMLButtonElement> = $('#endRound') as JQuery<HTMLButtonElement>;
 
 
@@ -22,6 +23,7 @@ export class Game {
 	constructor() {
 		this.gameBoard = new GameBoard();
 		this.gameBoard.players.val(this.minPlayers);
+		this.scoreBoard = new Scoreboard();
 
 		this.wireUpEvents();
 	}
@@ -54,10 +56,10 @@ export class Game {
 
 		this.gameBoard.startForm.hide();
 
-		this.updateScoreboard();
+		this.scoreBoard.updateScoreboard(this.players);
 		this.buildScoringPanel();
-		$(this.scoreboardDiv).show(1000);
-		$(this.scoringDiv).show(1000);
+		$(this.scoreBoard.scoreboardDiv).show(1000);
+		$(this.scoreBoard.scoringDiv).show(1000);
 	}
 
 	private endRound(): void {
@@ -75,7 +77,7 @@ export class Game {
 		}
 
 		// update the scoreboard & reset the scoring panel
-		this.updateScoreboard();
+		this.scoreBoard.updateScoreboard(this.players);
 		this.buildScoringPanel();
 
 		// TODO: check for a winner
@@ -105,19 +107,6 @@ export class Game {
 			alert('Player ' + winningPlayerNum + ' has won the game!');
 			// end the game somehow
 		}
-	}
-
-	private updateScoreboard(): void {
-		let scoreRows: HTMLElement = document.getElementById('scoreRows') as HTMLElement;
-		let rows: string = '';
-
-		for (var i = 0; i < this.players.length; i++) {
-			var player = this.players[i];
-
-			rows += `<tr><td>Player ${i+1}</td><td>${player.score}</td><td>${player.phase}</td></tr>`;
-		}
-
-		scoreRows.innerHTML = rows;
 	}
 
 	private buildScoringPanel(): void {
