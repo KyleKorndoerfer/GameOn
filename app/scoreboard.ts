@@ -13,7 +13,7 @@ export class Scoreboard {
 		for (var i = 0; i < players.length; i++) {
 			var player = players[i];
 
-			rows += `<tr><td>Player ${i+1}</td><td>${player.score}</td><td>${player.phase}</td></tr>`;
+			rows += `<tr><td>Player ${player.playerNumber}</td><td>${player.score}</td><td>${player.phase}</td></tr>`;
 		}
 
 		this.scoreRows.innerHTML = rows;
@@ -26,7 +26,7 @@ export class Scoreboard {
 		for (var i = 0; i < players.length; i++) {
 			var player = players[i];
 
-			rows += `<tr><td>Player ${i+1}</td>`;
+			rows += `<tr><td>Player ${player.playerNumber}</td>`;
 			rows += `  <td><input type="text" id="playerScore${i}" class="form-control input-sm" placeholder="points" /></td>`;
 			rows += `  <td><input type="checkbox" id="playerPhase${i}" class="form-control input-sm" /></td>`;
 			rows += `</tr>`;

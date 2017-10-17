@@ -51,7 +51,7 @@ export class Game {
 		}
 		// create the players array
 		for (var i = 0; i < numPlayers; i++) {
-			this.players.push( new Player() );
+			this.players.push( new Player(i+1) );
 		}
 
 		this.gameBoard.startForm.hide();
@@ -83,6 +83,10 @@ export class Game {
 		this.checkForWinner();
 	}
 
+	/**
+	 * Checks to see if any players have completed the final phase and, if so,
+	 * who has the lowest score.
+	 */
 	private checkForWinner(): void {
 		let playersAtPhase10: Player[];
 
@@ -92,13 +96,13 @@ export class Game {
 			}
 		});
 
-		let lowestScorePlayer: Player | undefined;
-		let winningPlayerNum : number | undefined;
+		let lowestScorePlayer: Player | undefined = undefined;
+		let winningPlayerNum : number | undefined = undefined;
 		for (var i = 0; i < playersAtPhase10.length; i++) {
 			var player = playersAtPhase10[i];
 			if (lowestScorePlayer === undefined || lowestScorePlayer.score > player.score) {
 				lowestScorePlayer = player;
-				winningPlayerNum = i+1;
+				winningPlayerNum = player.playerNumber;
 			}
 		}
 
