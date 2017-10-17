@@ -1,13 +1,24 @@
 {
 	"name": "gameon",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "A scorekeeper for games (backyard, cars, etc.)",
+	"homepage": "https://github.com/KyleKorndoerfer/GameOn",
+	"bugs": {
+		"url": "https://github.com/KyleKorndoerfer/GameOn/issues",
+		"email": "kyle.korndoerfer@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/KyleKorndoerfer/GameOn.git"
+	},
 	"main": "index.js",
 	"scripts": {
 		"start": "http-server",
 		"tsc": "tsc -p ."
 	},
-	"author": "S. Kyle Korndoerfer",
+	"author": {
+		"name": "S. Kyle Korndoerfer"
+	},
 	"license": "MIT",
 	"devDependencies": {
 		"http-server": "^0.10.0",
