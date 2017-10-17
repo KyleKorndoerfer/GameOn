@@ -15,11 +15,12 @@ export class GameBoard {
 		this.startButton = $('#startGame') as JQuery<HTMLButtonElement>;
 	}
 
-	// show/hide methods
+	/** Hide the player start form. */
 	hidePlayerForm(): void {
 		this.startForm.hide(1000);
 	}
 
+	/** Show the player start form. */
 	showPlayerForm(): void {
 		this.startForm.show(1000);
 	}

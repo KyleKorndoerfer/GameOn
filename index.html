@@ -53,49 +53,57 @@
 				</div>
 			</div>
 
-			<div class="row">
-				<div id="scoreboard" class="col-sm-6" style="display: none;">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">Scoreboard</h3>
+			<div id="scoringContainer" style="display: none;">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title">Scoreboard</h3>
+							</div>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Player #</th>
+										<th>Score</th>
+										<th>Phase</th>
+									</tr>
+								</thead>
+								<tbody id="scoreRows">
+								</tbody>
+							</table>
 						</div>
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Player #</th>
-									<th>Score</th>
-									<th>Phase</th>
-								</tr>
-							</thead>
-							<tbody id="scoreRows">
-							</tbody>
-						</table>
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div id="scoring" class="col-sm-6" style="display: none;">
-					<div class="panel panel-success">
-						<div class="panel-heading">
-							<h3 class="panel-title">Round scoring</h3>
-						</div>
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Player #</th>
-									<th>Score</th>
-									<th>Complete?</th>
-								</tr>
-							</thead>
-						    <tbody id="roundRows">
-							</tbody>
-						</table>
-						<div class="panel-footer" style="text-align: right;">
-							<button type="button" id="endRound" class="btn btn-xs btn-primary">End Round</button>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h3 class="panel-title">Round scoring</h3>
+							</div>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Player #</th>
+										<th>Score</th>
+										<th>Complete?</th>
+									</tr>
+								</thead>
+								<tbody id="roundRows">
+								</tbody>
+							</table>
+							<div class="panel-footer" style="text-align: right;">
+								<button type="button" id="endRound" class="btn btn-xs btn-primary">End Round</button>
+							</div>
 						</div>
 					</div>
 				</div>
+
+				<!--<div class="row">
+					<div class="col-sm-2">
+						<button type="button" id="endGame" class="btn btn-default">End Game</button>
+					</div>
+				</div>-->
 			</div>
 		</div>
 

@@ -4,6 +4,9 @@ import { Player } from './player';
 
 import * as $ from 'jquery';
 
+/**
+ * Main control point for the phase-10 game.
+ */
 export class Game {
 	// constants
 	private readonly minPlayers: number = 2;
@@ -15,6 +18,7 @@ export class Game {
 	private players: Player[] = [];
 
 	private endRoundButton: JQuery<HTMLButtonElement> = $('#endRound') as JQuery<HTMLButtonElement>;
+	private endGameButton: JQuery<HTMLButtonElement> = $('#endGame') as JQuery<HTMLButtonElement>;
 
 
 	/**
@@ -36,6 +40,8 @@ export class Game {
 		this.gameBoard.startButton.click( () => this.startNewGame() );
 		// ending a round of play
 		this.endRoundButton.click( () => this.endRound() );
+		// ending/abandoning the game
+		// TODO: this.endGameButton.click( () => this.endGameButton() );
 	}
 
 	/**
@@ -58,10 +64,12 @@ export class Game {
 
 		this.scoreBoard.updateScoreboard(this.players);
 		this.scoreBoard.buildScoringPanel(this.players);
-		$(this.scoreBoard.scoreboardDiv).show(1000);
-		$(this.scoreBoard.scoringDiv).show(1000);
+		$(this.scoreBoard.scoringContainer).show(1000);
 	}
 
+	/**
+	 * Performs the actions associated with the end of a round of play.
+	 */
 	private endRound(): void {
 		// process the scores from the round & update the player objects
 		for (var i = 0; i < this.players.length; i++) {

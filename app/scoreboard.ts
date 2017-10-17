@@ -1,9 +1,12 @@
 import { Player } from './player';
 
+/**
+ * Handles the logic around the display of the scoreboard.
+ */
 export class Scoreboard {
 	scoreRows: HTMLElement = document.getElementById('scoreRows') as HTMLElement;
-	scoreboardDiv: HTMLElement = document.getElementById('scoreboard') as HTMLElement;
-	scoringDiv: HTMLElement = document.getElementById('scoring') as HTMLElement;
+	scoringContainer: HTMLElement = document.getElementById('scoringContainer') as HTMLElement;
+
 	/**
 	 * Updates the player/scores portion of the scoreboard.
 	 */
@@ -19,6 +22,11 @@ export class Scoreboard {
 		this.scoreRows.innerHTML = rows;
 	}
 
+	/**
+	 * Builds and displays the scoring panel to record the results of a round of play.
+	 *
+	 * @param players The list of players to build the scoring panel with.
+	 */
 	buildScoringPanel(players: Player[]): void {
 		let scoringBody = document.getElementById('roundRows') as HTMLElement;
 		let rows: string = '';
