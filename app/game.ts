@@ -41,7 +41,7 @@ export class Game {
 		// ending a round of play
 		this.endRoundButton.click( () => this.endRound() );
 		// ending/abandoning the game
-		// TODO: this.endGameButton.click( () => this.endGameButton() );
+		this.endGameButton.click( () => this.endGame() );
 	}
 
 	/**
@@ -117,6 +117,19 @@ export class Game {
 		if (winningPlayerNum !== undefined) {
 			alert('Player ' + winningPlayerNum + ' has won the game!');
 			// end the game somehow
+		}
+	}
+
+	/**
+	 * Ends the current game and resest the 'board'.
+	 */
+	private endGame() {
+		let abandon: boolean = confirm("Are you sure you wish to abandon the game?");
+
+		if (abandon) {
+			this.players = [];
+			$(this.scoreBoard.scoringContainer).hide();
+			this.gameBoard.startForm.show();
 		}
 	}
 }
