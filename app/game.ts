@@ -1,6 +1,8 @@
 import { GameBoard } from './gameBoard';
 import { Scoreboard } from './scoreboard';
 import { Player } from './player';
+import { Notifications } from './notifications';
+import { AlertType } from './alertType';
 
 import * as $ from 'jquery';
 
@@ -15,6 +17,7 @@ export class Game {
 	// objects
 	private readonly gameBoard: GameBoard;
 	private readonly scoreBoard: Scoreboard;
+	private readonly notifications: Notifications = new Notifications()
 	private players: Player[] = [];
 
 	private endRoundButton: JQuery<HTMLButtonElement> = $('#endRound') as JQuery<HTMLButtonElement>;
@@ -115,8 +118,7 @@ export class Game {
 		}
 
 		if (winningPlayerNum !== undefined) {
-			alert('Player ' + winningPlayerNum + ' has won the game!');
-			// end the game somehow
+			this.notifications.addAlert(`Player ${winningPlayerNum} has won the game!`, AlertType.success);
 		}
 	}
 
@@ -130,6 +132,7 @@ export class Game {
 			this.players = [];
 			$(this.scoreBoard.scoringContainer).hide();
 			this.gameBoard.startForm.show();
+			this.notifications.clearAlerts();
 		}
 	}
 }
