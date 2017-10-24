@@ -1,6 +1,6 @@
 {
 	"name": "gameon",
-	"version": "0.1.0",
+	"version": "#{VERSION}#",
 	"description": "A scorekeeper for games (backyard, cars, etc.)",
 	"homepage": "https://github.com/KyleKorndoerfer/GameOn",
 	"bugs": {
