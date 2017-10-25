@@ -1,5 +1,9 @@
 import * as $ from 'jquery';
 
+/**
+ * Represents the 'playing surface' of the game.
+ * @class
+ */
 export class GameBoard {
 	readonly startForm: JQuery<HTMLElement>;
 	readonly players: JQuery<HTMLInputElement>;
@@ -7,6 +11,7 @@ export class GameBoard {
 
 	/**
 	 * Initializes a new instance of the gameboard
+	 * @constructor
 	 */
 	constructor() {
 		// Player form
