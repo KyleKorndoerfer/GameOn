@@ -3,11 +3,13 @@ import { Scoreboard } from './scoreboard';
 import { Player } from './player';
 import { Notifications } from './notifications';
 import { AlertType } from './alertType';
+import { StorageType, StorageManager } from './storageManager';
 
 import * as $ from 'jquery';
 
 /**
  * Main control point for the phase-10 game.
+ * @class
  */
 export class Game {
 	// constants
@@ -19,6 +21,7 @@ export class Game {
 	private readonly scoreBoard: Scoreboard;
 	private readonly notifications: Notifications = new Notifications()
 	private players: Player[] = [];
+	private readonly storage: StorageManager;
 
 	private endRoundButton: JQuery<HTMLButtonElement> = $('#endRound') as JQuery<HTMLButtonElement>;
 	private endGameButton: JQuery<HTMLButtonElement> = $('#endGame') as JQuery<HTMLButtonElement>;
@@ -26,13 +29,16 @@ export class Game {
 
 	/**
 	 * Initializes a new game instance.
+	 * @constructor
 	 */
 	constructor() {
 		this.gameBoard = new GameBoard();
 		this.gameBoard.players.val(this.minPlayers);
 		this.scoreBoard = new Scoreboard();
+		this.storage = new StorageManager(StorageType.session, 'phase10');
 
 		this.wireUpEvents();
+		this.restoreGame();
 	}
 
 	/**
@@ -45,6 +51,26 @@ export class Game {
 		this.endRoundButton.click( () => this.endRound() );
 		// ending/abandoning the game
 		this.endGameButton.click( () => this.endGame() );
+	}
+
+	/**
+	 * Restores a saved game session, if available
+	 */
+	private restoreGame(): void {
+		if (this.storage.isAvailable() && this.storage.hasGame()) {
+			this.players = JSON.parse(this.storage.loadGame());
+
+			// repeated block of code below in startNewGame()
+			this.gameBoard.startForm.hide();
+
+			this.scoreBoard.updateScoreboard(this.players);
+			this.scoreBoard.buildScoringPanel(this.players);
+			$(this.scoreBoard.scoringContainer).show(1000);
+
+			this.notifications.addAlert("Saved game restored", AlertType.info, true);
+		} else if (!this.storage.isAvailable()) {
+			this.notifications.addAlert("Unable to save game progress", AlertType.warning, true);
+		}
 	}
 
 	/**
@@ -68,6 +94,8 @@ export class Game {
 		this.scoreBoard.updateScoreboard(this.players);
 		this.scoreBoard.buildScoringPanel(this.players);
 		$(this.scoreBoard.scoringContainer).show(1000);
+
+		this.storage.saveGame(JSON.stringify(this.players));
 	}
 
 	/**
@@ -90,6 +118,8 @@ export class Game {
 		// update the scoreboard & reset the scoring panel
 		this.scoreBoard.updateScoreboard(this.players);
 		this.scoreBoard.buildScoringPanel(this.players);
+		// save the game progress
+		this.storage.saveGame(JSON.stringify(this.players));
 
 		this.checkForWinner();
 	}
@@ -119,17 +149,19 @@ export class Game {
 
 		if (winningPlayerNum !== undefined) {
 			this.notifications.addAlert(`Player ${winningPlayerNum} has won the game!`, AlertType.success);
+			this.storage.endGame();
 		}
 	}
 
 	/**
-	 * Ends the current game and resest the 'board'.
+	 * Ends the current game and resets the 'board'.
 	 */
-	private endGame() {
+	private endGame(): void {
 		let abandon: boolean = confirm("Are you sure you wish to abandon the game?");
 
 		if (abandon) {
 			this.players = [];
+			this.storage.endGame();
 			$(this.scoreBoard.scoringContainer).hide();
 			this.gameBoard.startForm.show();
 			this.notifications.clearAlerts();
