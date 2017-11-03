@@ -22,7 +22,6 @@ export class StorageManager {
 	constructor(type: StorageType, gameName: string) {
 		if (this.storageAvailable(type)) {
 			this.store = (window as any)[type];
-			console.debug(`storage type "${type}" is available`);
 		}
 
 		this.gameName = gameName;
@@ -63,7 +62,6 @@ export class StorageManager {
 	saveGame(data: string): void {
 		if (this.store !== null ) {
 			this.store.setItem(this.gameName, data);
-			console.debug('game data saved');
 		}
 	}
 
@@ -78,7 +76,7 @@ export class StorageManager {
 
 	/**
 	 * Check to see if the specified storage mechanism is available to use.
-	 * @description Taken from http://www.typescriptlang.org/docs/handbook/enums.html
+	 * @description Taken from https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
 	 * @param {StorageType} type The storage type to check availability for.
 	 * @returns {boolean} If the storage type is available.
 	 */

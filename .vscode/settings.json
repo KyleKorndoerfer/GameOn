@@ -6,7 +6,7 @@
 	},
 	"editor.parameterHints": true,
 	"editor.wordBasedSuggestions": true,
-	"editor.selectionHighlight": ,
+	"editor.selectionHighlight": true,
 
 	"typescript.tsdk": "C:\\Users\\kylek\\AppData\\Roaming\\npm\\node_modules\\typescript\\lib"
 }
