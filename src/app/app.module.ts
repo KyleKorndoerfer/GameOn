@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppBootstrapModule } from './app-bootstrap.module';
 import { AppRoutingModule } from './app-routing.module';
+import { GamesModule } from './games/games.module';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -15,6 +16,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 	imports: [
 		BrowserModule,
 		AppBootstrapModule,
+		GamesModule,
 		AppRoutingModule
 	],
 	providers: [],
